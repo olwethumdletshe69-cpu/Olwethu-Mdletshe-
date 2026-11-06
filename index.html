@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
+<meta name="description" content="The Learning Hub — an interactive learning experience for Mathematics, Physical Sciences and Life Sciences.">
+<title>The Learning Hub | Learn Beyond Limits</title>
+
+<style>
+:root {
+  --bg:#090d18;
+  --panel:#121a2b;
+  --panel2:#18243a;
+  --gold:#e9bd70;
+  --blue:#72b8ff;
+  --green:#72dfb0;
+  --text:#f4f5fa;
+  --muted:#9ba9bd;
+  --border:rgba(255,255,255,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ line-height:1.6;
+}
+button,a{font:inherit}
+a{color:inherit;text-decoration:none}
+header{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 7%;border-bottom:1px solid var(--border);
+ background:rgba(9,13,24,.95);
+ position:sticky;top:0;z-index:10;
+ backdrop-filter:blur(15px);
+}
+.logo{font-size:21px;font-weight:800;letter-spacing:-1px}
+.logo span{color:var(--gold)}
+nav{display:flex;gap:22px;align-items:center}
+nav a{font-size:13px;color:var(--muted)}
+nav a:hover{color:var(--gold)}
+.hero{
+ padding:85px 7% 75px;
+ background:
+ radial-gradient(ellipse at 85% 20%,rgba(91,124,190,.18),transparent 45%),
+ radial-gradient(ellipse at 10% 90%,rgba(225,174,100,.09),transparent 40%);
+}
+.eyebrow{
+ color:var(--gold);font-size:12px;letter-spacing:3px;
+ font-weight:bold;text-transform:uppercase;
+}
+.hero h1{
+ font-size:clamp(40px,7vw,76px);
+ line-height:1.05;max-width:850px;
+ letter-spacing:-3px;margin:22px 0;
+}
+.hero h1 span{color:var(--gold)}
+.hero p{color:var(--muted);max-width:570px;font-size:17px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{
+ display:inline-block;padding:13px 22px;border-radius:9px;
+ border:1px solid var(--border);cursor:pointer;
+ transition:.2s;font-weight:bold;
+}
+.primary{background:var(--gold);color:#17120a;border:none}
+.secondary{background:transparent;color:var(--text)}
+.btn:hover{transform:translateY(-3px);filter:brightness(1.1)}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:12px;margin-top:55px;max-width:620px;
+}
+.stat{border-left:2px solid var(--gold);padding-left:15px}
+.stat strong{display:block;font-size:23px}
+.stat small{color:var(--muted)}
+section{padding:65px 7%}
+.section-heading{margin-bottom:30px}
+.section-heading h2{font-size:32px;margin:5px 0}
+.section-heading p{color:var(--muted)}
+.subjects{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.card{
+ background:linear-gradient(145deg,var(--panel2),var(--panel));
+ border:1px solid var(--border);border-radius:17px;
+ padding:25px;transition:.25s;
+}
+.card:hover{transform:translateY(-5px);border-color:var(--gold)}
+.subject-icon{font-size:34px}
+.card h3{font-size:20px;margin:12px 0 5px}
+.card p{color:var(--muted);font-size:14px}
+.tag{color:var(--gold);font-size:11px;letter-spacing:1px}
+.card a{display:inline-block;margin-top:15px;color:var(--gold);font-size:13px;font-weight:bold}
+.learning{
+ display:grid;grid-template-columns:1fr 1fr;gap:20px;
+}
+.activity{background:var(--panel);border:1px solid var(--border);
+ border-radius:17px;padding:27px}
+.activity h3{margin-top:5px}
+.activity p{color:var(--muted);font-size:14px}
+.interactive-button{
+ background:var(--gold);color:#17120a;border:0;
+ border-radius:8px;padding:11px 16px;
+ font-weight:bold;cursor:pointer;margin-top:12px;
+}
+.interactive-button:hover{filter:brightness(1.1)}
+.answer{
+ padding:15px;background:var(--panel2);border-radius:10px;
+ margin-top:14px;display:none;color:var(--green);
+}
+.question{font-weight:bold;margin:15px 0}
+.option{
+ display:block;width:100%;text-align:left;padding:12px;
+ background:var(--panel2);color:var(--text);
+ border:1px solid var(--border);border-radius:8px;
+ margin:8px 0;cursor:pointer;
+}
+.option:hover{border-color:var(--gold)}
+.option:disabled{cursor:default;opacity:.9}
+#quizResult{margin-top:15px;color:var(--green);font-weight:bold}
+.wave-box{
+ background:var(--panel2);border-radius:12px;padding:10px;
+ margin:15px 0;
+}
+.wave-box svg{width:100%;height:auto}
+footer{
+ border-top:1px solid var(--border);padding:30px 7%;
+ text-align:center;color:var(--muted);font-size:13px;
+}
+footer strong{color:var(--gold)}
+@media(max-width:750px){
+ nav{gap:10px}
+ nav a{font-size:11px}
+ .subjects{grid-template-columns:1fr}
+ .learning{grid-template-columns:1fr}
+ .hero{padding-top:65px}
+ .hero h1{letter-spacing:-2px}
+ section{padding:48px 6%}
+ header{padding:15px 5%}
+}
+@media(max-width:390px){
+ nav a{font-size:10px}
+ .logo{font-size:17px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <a class="logo" href="#">THE <span>LEARNING HUB.</span></a>
+ <nav>
+  <a href="#subjects">Subjects</a>
+  <a href="#lab">Learning Lab</a>
+  <a href="#quiz">Quiz</a>
+ </nav>
+</header>
+
+<main>
+
+<section class="hero">
+ <div class="eyebrow">Education • Innovation • Excellence</div>
+ <h1>Learn beyond <span>limits.</span></h1>
+ <p>
+  Welcome to a new way of learning. Explore knowledge,
+  understand difficult concepts and develop your academic
+  potential through interactive experiences.
+ </p>
+ <div class="actions">
+  <a class="btn primary" href="#subjects">Explore subjects ↗</a>
+  <a class="btn secondary" href="#lab">Enter learning lab</a>
+ </div>
+ <div class="stats">
+  <div class="stat"><strong>03</strong><small>Core subjects</small></div>
+  <div class="stat"><strong>∞</strong><small>Learning possibilities</small></div>
+  <div class="stat"><strong>01</strong><small>Learning destination</small></div>
+ </div>
+</section>
+
+<section id="subjects">
+ <div class="section-heading">
+  <div class="eyebrow">Your academic journey</div>
+  <h2>Explore your subjects.</h2>
+  <p>Build knowledge one subject at a time.</p>
+ </div>
+
+ <div class="subjects">
+  <article class="card">
+   <div class="subject-icon">📐</div>
+   <div class="tag">01 / MATHEMATICS</div>
+   <h3>Mathematics</h3>
+   <p>Explore numbers, equations, geometry, functions and problem-solving.</p>
+   <a href="#lab">Explore learning lab →</a>
+  </article>
+
+  <article class="card">
+   <div class="subject-icon">⚡</div>
+   <div class="tag">02 / PHYSICAL SCIENCES</div>
+   <h3>Physical Sciences</h3>
+   <p>Discover physics, chemistry, motion, energy, waves and matter.</p>
+   <a href="#waves">Explore wave activity →</a>
+  </article>
+
+  <article class="card">
+   <div class="subject-icon">🧬</div>
+   <div class="tag">03 / LIFE SCIENCES</div>
+   <h3>Life Sciences</h3>
+   <p>Understand cells, organisms, ecosystems and the science of life.</p>
+   <a href="#lab">Explore learning lab →</a>
+  </article>
+ </div>
+</section>
+
+<section id="lab">
+ <div class="section-heading">
+  <div class="eyebrow">Interactive education</div>
+  <h2>The Learning Lab.</h2>
+  <p>Don't just read about science. Explore the concepts.</p>
+ </div>
+
+ <div class="learning">
+  <article class="activity" id="waves">
+   <div class="tag">PHYSICAL SCIENCES / INTERACTIVE</div>
+   <h3>🌊 Wave Explorer</h3>
+   <p>Discover how a transverse wave moves.</p>
+   <div class="wave-box">
+    <svg viewBox="0 0 320 100" role="img" aria-label="Illustration of a transverse wave">
+     <line x1="5" y1="50" x2="315" y2="50"
+       stroke="#53647b" stroke-dasharray="4 4"/>
+     <path d="M5 50 Q25 5 45 50 T85 50 T125 50 T165 50 T205 50 T245 50 T285 50 T325 50"
+       fill="none" stroke="#72b8ff" stroke-width="3"/>
+    </svg>
+   </div>
+   <p><strong style="color:#72b8ff">Remember:</strong> A transverse wave has vibrations perpendicular to its direction of travel.</p>
+   <button class="interactive-button" onclick="showWave()">Reveal wave flashcard</button>
+   <div class="answer" id="waveAnswer">
+    <strong>Wave flashcard</strong><br><br>
+    Crest: The highest point of a wave.<br>
+    Trough: The lowest point of a wave.<br>
+    Amplitude: Maximum displacement from the rest position.<br>
+    Wavelength: Distance between two consecutive points in phase.
+   </div>
+  </article>
+
+  <article class="activity">
+   <div class="tag">MATHEMATICS / QUICK KNOWLEDGE</div>
+   <h3>📐 Equation Explorer</h3>
+   <p>Try a simple algebra example.</p>
+   <div class="question">Solve: 2x + 6 = 16</div>
+   <p>Think about the inverse operations needed to find x.</p>
+   <button class="interactive-button" onclick="showEquation()">Reveal solution</button>
+   <div class="answer" id="equationAnswer">
+    2x + 6 = 16<br>
+    2x = 16 − 6<br>
+    2x = 10<br>
+    x = 10 ÷ 2<br>
+    <strong>x = 5</strong>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section id="quiz">
+ <div class="section-heading">
+  <div class="eyebrow">Test your understanding</div>
+  <h2>Science knowledge quiz.</h2>
+  <p>Three questions. One opportunity to challenge yourself.</p>
+ </div>
+
+ <div class="activity">
+  <div class="tag">INTERACTIVE QUIZ</div>
+  <h3 id="questionNumber">Question 1 of 3</h3>
+  <div class="question" id="questionText"></div>
+  <div id="options"></div>
+  <div id="quizResult"></div>
+  <button class="interactive-button" id="nextButton"
+    onclick="nextQuestion()" style="display:none">
+    Next question →
+  </button>
+  <button class="interactive-button" id="restartButton"
+    onclick="restartQuiz()" style="display:none">
+    Try again ↻
+  </button>
+ </div>
+</section>
+
+<section>
+ <div class="section-heading">
+  <div class="eyebrow">The philosophy</div>
+  <h2>Knowledge changes everything.</h2>
+  <p>
+   Every concept you understand is another step towards
+   becoming a better problem-solver, thinker and learner.
+  </p>
+ </div>
+</section>
+
+</main>
+
+<footer>
+ <strong>THE LEARNING HUB</strong>
+ <p>Learn with purpose. Think with confidence. Grow through knowledge.</p>
+ <p>© <span id="year"></span> The Learning Hub. All rights reserved.</p>
+</footer>
+
+<script>
+function showWave(){
+ const el=document.getElementById("waveAnswer");
+ el.style.display=el.style.display==="block"?"none":"block";
+}
+function showEquation(){
+ const el=document.getElementById("equationAnswer");
+ el.style.display=el.style.display==="block"?"none":"block";
+}
+
+const questions=[
+ {
+  q:"Which organelle is responsible for releasing energy during cellular respiration?",
+  options:["Nucleus","Mitochondrion","Cell wall","Chloroplast"],
+  answer:1,
+  explanation:"The mitochondrion is the main site of aerobic cellular respiration."
+ },
+ {
+  q:"What is the SI unit of force?",
+  options:["Joule","Watt","Newton","Metre"],
+  answer:2,
+  explanation:"Force is measured in newtons (N)."
+ },
+ {
+  q:"What is the highest point of a transverse wave called?",
+  options:["Trough","Crest","Amplitude","Frequency"],
+  answer:1,
+  explanation:"The crest is the highest point of a transverse wave."
+ }
+];
+
+let current=0;
+let score=0;
+let answered=false;
+
+function loadQuestion(){
+ answered=false;
+ const q=questions[current];
+ document.getElementById("questionNumber").textContent=
+ "Question "+(current+1)+" of "+questions.length;
+ document.getElementById("questionText").textContent=q.q;
+ document.getElementById("quizResult").textContent="";
+ document.getElementById("nextButton").style.display="none";
+ document.getElementById("restartButton").style.display="none";
+
+ const container=document.getElementById("options");
+ container.innerHTML="";
+ q.options.forEach((option,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.textContent=String.fromCharCode(65+index)+". "+option;
+  button.onclick=()=>chooseAnswer(index);
+  container.appendChild(button);
+ });
+}
+
+function chooseAnswer(index){
+ if(answered)return;
+ answered=true;
+ const q=questions[current];
+ const buttons=document.querySelectorAll(".option");
+
+ buttons.forEach((button,i)=>{
+  button.disabled=true;
+  if(i===q.answer){
+   button.style.borderColor="#72dfb0";
+  }
+ });
+
+ const result=document.getElementById("quizResult");
+ if(index===q.answer){
+  score++;
+  result.textContent="✓ Correct! "+q.explanation;
+ }else{
+  result.textContent="Not quite. "+q.explanation;
+ }
+ document.getElementById("nextButton").style.display="inline-block";
+ if(current===questions.length-1){
+  document.getElementById("nextButton").textContent="See my results";
+ }
+}
+
+function nextQuestion(){
+ if(!answered)return;
+ if(current<questions.length-1){
+  current++;
+  loadQuestion();
+ }else{
+  document.getElementById("questionNumber").textContent="Quiz completed!";
+  document.getElementById("questionText").textContent=
+  "You scored "+score+" out of "+questions.length+".";
+  document.getElementById("options").innerHTML="";
+  document.getElementById("quizResult").textContent=
+  score===3?"Excellent work! Perfect score!":
+  "Every attempt is an opportunity to learn. Keep practising!";
+  document.getElementById("nextButton").style.display="none";
+  document.getElementById("restartButton").style.display="inline-block";
+ }
+}
+
+function restartQuiz(){
+ current=0;
+ score=0;
+ loadQuestion();
+}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+loadQuestion();
+</script>
+
+</body>
+</html>
